@@ -17,7 +17,7 @@ MyScene::MyScene() : Scene()
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.   
 	myentity = new MyEntity();
-	myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
+	myentity->position = Point2(SWIDTH/2, SHEIGHT/1.2);
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
@@ -54,11 +54,23 @@ void MyScene::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Rotate color
+	// Make myentity go to middle lane
 	// ###############################################################
-	if (t.seconds() > 0.0333f) {
-		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.01f);
-		t.start();
+	if (input()->getKeyDown(KeyCode::S)) {
+		myentity->position = Point2(SWIDTH / 2, SHEIGHT / 1.2);
+	}
+	
+	// ###############################################################
+	// Make myentity go to left lane
+	// ###############################################################
+	if (input()->getKeyDown(KeyCode::A)) {
+		myentity->position = Point2(SWIDTH / 6, SHEIGHT / 1.2);
+	}
+
+	// ###############################################################
+	// Make myentity go to right lane
+	// ###############################################################
+	if (input()->getKeyDown(KeyCode::D)) {
+		myentity->position = Point2(SWIDTH / 1.2, SHEIGHT / 1.2);
 	}
 }
