@@ -15,7 +15,7 @@ MyScene::MyScene() : Scene()
 	t.start();
 
 	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
+	// the Sprite is added in Constructor of MyEntity.   
 	myentity = new MyEntity();
 	myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
 
