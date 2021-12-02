@@ -13,6 +13,8 @@
 
 #include "myentity.h"
 
+
+
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
 {
