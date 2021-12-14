@@ -17,16 +17,28 @@ MyScene::MyScene() : Scene()
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.   
 	myentity = new MyEntity();
-	myentity->position = Point2(SWIDTH/2, SHEIGHT/1.2);
+	myentity->position = Point2(SWIDTH / 2, SHEIGHT / 1.2);
 
 	background = new Background();
-	background->position = Point2(SWIDTH/2, SHEIGHT/2);
+	background->position = Point2(SWIDTH / 2, SHEIGHT / 2);
 	background->scale = Point2(1.25f, 1.4f);
+
+	banaan = new Banaan();
+	banaan->position = Point2(SWIDTH / 2, SHEIGHT / 2);
+	
+	banaan2 = new Banaan2();
+	banaan2->position = Point2(SWIDTH / 6, SHEIGHT / 2);
+
+	bom = new Bom();
+	bom->position = Point2(SWIDTH / 1.2, SHEIGHT / 2);
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(background);
 	this->addChild(myentity);
+	this->addChild(banaan);
+	this->addChild(banaan2);
+	this->addChild(bom);
 }
 
 
@@ -35,10 +47,16 @@ MyScene::~MyScene()
 	// deconstruct and delete the Tree
 	this->removeChild(myentity);
 	this->removeChild(background);
+	this->removeChild(banaan);
+	this->removeChild(banaan2);
+	this->removeChild(bom);
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
 	delete background;
+	delete banaan;
+	delete banaan2;
+	delete bom;
 }
 
 void MyScene::update(float deltaTime)

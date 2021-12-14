@@ -13,6 +13,10 @@
 
 #include "myentity.h"
 #include "background.h"
+#include "banaan.h"
+#include "banaan2.h"
+#include "bom.h"
+
 
 
 
@@ -34,6 +38,9 @@ private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
 	Background* background;
+	Banaan* banaan;
+	Banaan2* banaan2;
+	Bom* bom;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };

@@ -160,6 +160,13 @@ IF(MAKE_START)
 		start/myscene.h
 		start/background.cpp
 		start/background.h
+		start/banaan.cpp
+		start/banaan.h
+		start/banaan2.cpp
+		start/banaan2.h
+		start/bom.cpp
+		start/bom.h
+
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}
