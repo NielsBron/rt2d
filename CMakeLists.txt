@@ -158,6 +158,8 @@ IF(MAKE_START)
 		start/myentity.h
 		start/myscene.cpp
 		start/myscene.h
+		start/background.cpp
+		start/background.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

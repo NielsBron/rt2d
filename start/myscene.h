@@ -12,6 +12,7 @@
 #include <rt2d/scene.h>
 
 #include "myentity.h"
+#include "background.h"
 
 
 
@@ -32,6 +33,7 @@ public:
 private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
+	Background* background;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };

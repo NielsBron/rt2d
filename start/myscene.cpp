@@ -19,8 +19,13 @@ MyScene::MyScene() : Scene()
 	myentity = new MyEntity();
 	myentity->position = Point2(SWIDTH/2, SHEIGHT/1.2);
 
+	background = new Background();
+	background->position = Point2(SWIDTH/2, SHEIGHT/2);
+	background->scale = Point2(1.25f, 1.4f);
+
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
+	this->addChild(background);
 	this->addChild(myentity);
 }
 
@@ -29,9 +34,11 @@ MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
 	this->removeChild(myentity);
+	this->removeChild(background);
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
+	delete background;
 }
 
 void MyScene::update(float deltaTime)
@@ -47,7 +54,7 @@ void MyScene::update(float deltaTime)
 	// Spacebar scales myentity
 	// ###############################################################
 	if (input()->getKeyDown(KeyCode::Space)) {
-		myentity->scale = Point(0.5f, 0.5f);
+		myentity->scale = Point(0.8f, 0.8f);
 	}
 	if (input()->getKeyUp(KeyCode::Space)) {
 		myentity->scale = Point(1.0f, 1.0f);
