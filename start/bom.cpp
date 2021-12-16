@@ -18,4 +18,5 @@ Bom::~Bom()
 
 void Bom::update(float deltaTime)
 {
+	this->position.y += 200 * deltaTime;
 }

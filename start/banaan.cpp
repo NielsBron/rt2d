@@ -18,4 +18,5 @@ Banaan::~Banaan()
 
 void Banaan::update(float deltaTime)
 {
+	this->position.y += 200 * deltaTime;
 }

@@ -31,7 +31,7 @@ MyScene::MyScene() : Scene()
 	background->scale = Point2(1.25f, 1.4f);
 
 	banaan = new Banaan();
-	banaan->position = Point2(640, 360);
+	banaan->position = Point2(640, -100);
 	Line s2;
 	s2.addPoint(-75, -75);
 	s2.addPoint(75, -75);
@@ -41,10 +41,24 @@ MyScene::MyScene() : Scene()
 	banaan->addLine(&s2);
 	
 	banaan2 = new Banaan2();
-	banaan2->position = Point2(SWIDTH / 6, SHEIGHT / 2);
+	banaan2->position = Point2(215, -100);
+	Line s3;
+	s3.addPoint(-75, -75);
+	s3.addPoint(75, -75);
+	s3.addPoint(75, 75);
+	s3.addPoint(-75, 75);
+	s3.addPoint(-75, -75);
+	banaan2->addLine(&s3);
 
 	bom = new Bom();
-	bom->position = Point2(SWIDTH / 1.2, SHEIGHT / 2);
+	bom->position = Point2(1065, -100);
+	Line s4;
+	s4.addPoint(-75, -75);
+	s4.addPoint(75, -75);
+	s4.addPoint(75, 75);
+	s4.addPoint(-75, 75);
+	s4.addPoint(-75, -75);
+	bom->addLine(&s4);
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
@@ -76,9 +90,12 @@ MyScene::~MyScene()
 void MyScene::update(float deltaTime)
 {
 
-	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 151, 151);
-	Rectangle rect2 = Rectangle(banaan->position.x, banaan->position.y, 151, 151);
+	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
+	Rectangle rect2 = Rectangle(banaan->position.x, banaan->position.y, 150, 150);
+	Rectangle rect3 = Rectangle(banaan2->position.x, banaan2->position.y, 150, 150);
+	Rectangle rect4 = Rectangle(bom->position.x, bom->position.y, 150, 150);
 
+	
 	// ###############################################################
 	// Escape key stops the Scene
 	// ###############################################################
@@ -117,17 +134,37 @@ void MyScene::update(float deltaTime)
 		myentity->position = Point2(1065, 600);
 	}
 
-	//for test
-	if (input()->getKeyDown(KeyCode::P)) {
-		myentity->position = Point2(640, 210);
-	}
+	// ###############################################################
+	// Collide actions
+	// ###############################################################
 
+	//banaan1
  	if (Collider::rectangle2rectangle(rect1, rect2)) {
 		banaan->line()->color = RED;
 		myentity->line()->color = RED;
 	}
 	else {
 		banaan->line()->color = GREEN;
+		myentity->line()->color = GREEN;
+	}
+
+	//banaan2
+	if (Collider::rectangle2rectangle(rect1, rect3)) {
+		banaan2->line()->color = RED;
+		myentity->line()->color = RED;
+	}
+	else {
+		banaan2->line()->color = GREEN;
+		myentity->line()->color = GREEN;
+	}
+
+	//bom
+	if (Collider::rectangle2rectangle(rect1, rect4)) {
+		bom->line()->color = RED;
+		myentity->line()->color = RED;
+	}
+	else {
+		bom->line()->color = GREEN;
 		myentity->line()->color = GREEN;
 	}
 }
