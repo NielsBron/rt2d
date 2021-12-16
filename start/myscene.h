@@ -16,6 +16,7 @@
 #include "banaan.h"
 #include "banaan2.h"
 #include "bom.h"
+#include "collider.h"
 
 
 

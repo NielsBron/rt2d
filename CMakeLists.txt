@@ -166,6 +166,7 @@ IF(MAKE_START)
 		start/banaan2.h
 		start/bom.cpp
 		start/bom.h
+		start/collider.h
 
 	)
 	target_link_libraries(start
