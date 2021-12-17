@@ -95,7 +95,7 @@ void MyScene::update(float deltaTime)
 	Rectangle rect3 = Rectangle(banaan2->position.x, banaan2->position.y, 150, 150);
 	Rectangle rect4 = Rectangle(bom->position.x, bom->position.y, 150, 150);
 
-	
+
 	// ###############################################################
 	// Escape key stops the Scene
 	// ###############################################################
@@ -140,8 +140,7 @@ void MyScene::update(float deltaTime)
 
 	//banaan1
  	if (Collider::rectangle2rectangle(rect1, rect2)) {
-		banaan->line()->color = RED;
-		myentity->line()->color = RED;
+		this->removeChild(banaan);
 	}
 	else {
 		banaan->line()->color = GREEN;
@@ -150,8 +149,7 @@ void MyScene::update(float deltaTime)
 
 	//banaan2
 	if (Collider::rectangle2rectangle(rect1, rect3)) {
-		banaan2->line()->color = RED;
-		myentity->line()->color = RED;
+		this->removeChild(banaan2);
 	}
 	else {
 		banaan2->line()->color = GREEN;
@@ -160,8 +158,7 @@ void MyScene::update(float deltaTime)
 
 	//bom
 	if (Collider::rectangle2rectangle(rect1, rect4)) {
-		bom->line()->color = RED;
-		myentity->line()->color = RED;
+		this->removeChild(bom);
 	}
 	else {
 		bom->line()->color = GREEN;
