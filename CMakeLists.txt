@@ -167,6 +167,9 @@ IF(MAKE_START)
 		start/bom.cpp
 		start/bom.h
 		start/collider.h
+		start/bullet.h
+		start/bullet.cpp
+
 
 	)
 	target_link_libraries(start

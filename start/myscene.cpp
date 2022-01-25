@@ -60,6 +60,8 @@ MyScene::MyScene() : Scene()
 	s4.addPoint(-75, -75);
 	bom->addLine(&s4);
 
+	int PointScore = 0;
+
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(background);
@@ -67,6 +69,7 @@ MyScene::MyScene() : Scene()
 	this->addChild(banaan);
 	this->addChild(banaan2);
 	this->addChild(bom);
+
 }
 
 
@@ -85,6 +88,18 @@ MyScene::~MyScene()
 	delete banaan;
 	delete banaan2;
 	delete bom;
+}
+
+void MyScene::updateBullets(float deltaTime)
+{
+	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
+		if (bullets[i]->position.x > SWIDTH || bullets[i]->position.x < 0 || bullets[i]->position.y < 0 || bullets[i]->position.y > SHEIGHT ) {
+			//std::cout << "-- deleting Bullet " << i << " : (" << bullets[i]->position.x << "," << bullets[i]->position.y << ")" << std::endl;
+			removeChild(bullets[i]);
+			delete bullets[i]; // delete from the heap first
+			bullets.erase(bullets.begin() + i); // then, remove from the list
+		}
+	}
 }
 
 void MyScene::update(float deltaTime)
@@ -117,7 +132,7 @@ void MyScene::update(float deltaTime)
 	// Make myentity go to middle lane
 	// ###############################################################
 	if (input()->getKeyDown(KeyCode::S)) {
-		myentity->position = Point2(SWIDTH / 2, SHEIGHT / 1.2);
+		myentity->position = Point2(640, 600);
 	}
 
 	// ###############################################################
