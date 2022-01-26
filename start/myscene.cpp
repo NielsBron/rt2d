@@ -14,62 +14,31 @@ MyScene::MyScene() : Scene()
 	// start the timer.
 	t.start();
 
+	srand(time(nullptr));
+
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.   
 	myentity = new MyEntity();
 	myentity->position = Point2(640, 600);
-	Line s1;
-	s1.addPoint(-75, -75);
-	s1.addPoint(75, -75);
-	s1.addPoint(75, 75);
-	s1.addPoint(-75, 75);
-	s1.addPoint(-75, -75);
-	myentity->addLine(&s1);
 
 	background = new Background();
 	background->position = Point2(640, 360);
 	background->scale = Point2(1.25f, 1.4f);
 
-	banaan = new Banaan();
-	banaan->position = Point2(640, -100);
-	Line s2;
-	s2.addPoint(-75, -75);
-	s2.addPoint(75, -75);
-	s2.addPoint(75, 75);
-	s2.addPoint(-75, 75);
-	s2.addPoint(-75, -75);
-	banaan->addLine(&s2);
-	
-	banaan2 = new Banaan2();
-	banaan2->position = Point2(215, -100);
-	Line s3;
-	s3.addPoint(-75, -75);
-	s3.addPoint(75, -75);
-	s3.addPoint(75, 75);
-	s3.addPoint(-75, 75);
-	s3.addPoint(-75, -75);
-	banaan2->addLine(&s3);
+	std::vector<int> lanes = {215, 640, 1065};
 
-	bom = new Bom();
-	bom->position = Point2(1065, -100);
-	Line s4;
-	s4.addPoint(-75, -75);
-	s4.addPoint(75, -75);
-	s4.addPoint(75, 75);
-	s4.addPoint(-75, 75);
-	s4.addPoint(-75, -75);
-	bom->addLine(&s4);
-
-	int PointScore = 0;
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(background);
 	this->addChild(myentity);
-	this->addChild(banaan);
-	this->addChild(banaan2);
-	this->addChild(bom);
 
+	for (size_t i = 0; i < lanes.size(); i++) {
+		Pickup* pickup = new Pickup();
+		pickup->position = Point2(lanes[i], -200);
+		pickups.push_back(pickup);
+		this->addChild(pickup);
+	}
 }
 
 
@@ -78,37 +47,19 @@ MyScene::~MyScene()
 	// deconstruct and delete the Tree
 	this->removeChild(myentity);
 	this->removeChild(background);
-	this->removeChild(banaan);
-	this->removeChild(banaan2);
-	this->removeChild(bom);
+
+	for (size_t i = 0; i < pickups.size(); i++) {
+		this->removeChild(pickups[i]);
+		delete pickups[i];
+	}
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
 	delete background;
-	delete banaan;
-	delete banaan2;
-	delete bom;
-}
-
-void MyScene::updateBullets(float deltaTime)
-{
-	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
-		if (bullets[i]->position.x > SWIDTH || bullets[i]->position.x < 0 || bullets[i]->position.y < 0 || bullets[i]->position.y > SHEIGHT ) {
-			//std::cout << "-- deleting Bullet " << i << " : (" << bullets[i]->position.x << "," << bullets[i]->position.y << ")" << std::endl;
-			removeChild(bullets[i]);
-			delete bullets[i]; // delete from the heap first
-			bullets.erase(bullets.begin() + i); // then, remove from the list
-		}
-	}
 }
 
 void MyScene::update(float deltaTime)
 {
-
-	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
-	Rectangle rect2 = Rectangle(banaan->position.x, banaan->position.y, 150, 150);
-	Rectangle rect3 = Rectangle(banaan2->position.x, banaan2->position.y, 150, 150);
-	Rectangle rect4 = Rectangle(bom->position.x, bom->position.y, 150, 150);
 
 
 	// ###############################################################
@@ -153,30 +104,21 @@ void MyScene::update(float deltaTime)
 	// Collide actions
 	// ###############################################################
 
-	//banaan1
- 	if (Collider::rectangle2rectangle(rect1, rect2)) {
-		this->removeChild(banaan);
-	}
-	else {
-		banaan->line()->color = GREEN;
-		myentity->line()->color = GREEN;
+	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
+
+	int score = 0;
+
+	for (size_t i = 0; i < pickups.size(); i++) {
+		//std::cout << pickups[i]->position.y << " ";
+		Rectangle rect2 = Rectangle(pickups[i]->position.x, pickups[i]->position.y, 150, 150);
+		if (Collider::rectangle2rectangle(rect1, rect2)) {
+			this->removeChild(pickups[i]);
+			score ++;
+			std::cout << "score: " << score << std::endl;
+		}
 	}
 
-	//banaan2
-	if (Collider::rectangle2rectangle(rect1, rect3)) {
-		this->removeChild(banaan2);
-	}
-	else {
-		banaan2->line()->color = GREEN;
-		myentity->line()->color = GREEN;
-	}
+	// std:: cout<< std::endl;
 
-	//bom
-	if (Collider::rectangle2rectangle(rect1, rect4)) {
-		this->removeChild(bom);
-	}
-	else {
-		bom->line()->color = GREEN;
-		myentity->line()->color = GREEN;
-	}
+
 }

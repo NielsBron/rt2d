@@ -160,12 +160,8 @@ IF(MAKE_START)
 		start/myscene.h
 		start/background.cpp
 		start/background.h
-		start/banaan.cpp
-		start/banaan.h
-		start/banaan2.cpp
-		start/banaan2.h
-		start/bom.cpp
-		start/bom.h
+		start/pickup.cpp
+		start/pickup.h
 		start/collider.h
 		start/bullet.h
 		start/bullet.cpp

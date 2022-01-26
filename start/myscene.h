@@ -15,7 +15,7 @@
 #include "background.h"
 #include "banaan.h"
 #include "banaan2.h"
-#include "bom.h"
+#include "pickup.h"
 #include "collider.h"
 #include "bullet.h"
 #include <string>
@@ -23,7 +23,7 @@
 
 
 
-/// @brief The MyScene class is the Scene implementation.
+ /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
 {
 public:
@@ -36,15 +36,14 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-	virtual void updateBullets(float deltaTime);
+	//virtual void updateBullets(float deltaTime);
 
 private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
 	Background* background;
-	Banaan* banaan;
-	Banaan2* banaan2;
-	Bom* bom;
+	std::vector<Pickup*> pickups;
+	Pickup* pickup;
 	Bullet* bullet;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;

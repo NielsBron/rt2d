@@ -6,24 +6,28 @@
  * @brief description of MyEntity behavior.
  */
 
-#ifndef BOM_H
-#define BOM_H
+#ifndef PICKUP_H
+#define PICKUP_H
 
 #include <rt2d/entity.h>
 
+enum class Type { BOMB = 0, BANANA = 1, BANANA2 = 2 };
+
 /// @brief The MyEntity class is the Entity implementation.
-class Bom : public Entity
+class Pickup : public Entity
 {
 public:
 	/// @brief Constructor
-	Bom();
+	Pickup();
 	/// @brief Destructor
-	virtual ~Bom();
+	virtual ~Pickup();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
+
+	Type type;
 
 private:
 	/* add your private declarations */
