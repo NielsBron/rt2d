@@ -19,6 +19,7 @@
 #include "collider.h"
 #include "bullet.h"
 #include <string>
+#include <rt2d/text.h>
 
 
 
@@ -45,8 +46,11 @@ private:
 	std::vector<Pickup*> pickups;
 	Pickup* pickup;
 	Bullet* bullet;
+	Text* scoretext;
+	int score;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
+	std::vector<int> lanes = {215, 640, 1065};
 
 	std::vector<Bullet*> bullets;
 };
