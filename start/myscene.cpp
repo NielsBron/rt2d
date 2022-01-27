@@ -19,8 +19,7 @@ MyScene::MyScene() : Scene()
 	scoretext = new Text();
 	scoretext->position.x = 50;
 	scoretext->position.y = 75;
-	score = 42;
-	this->addChild(scoretext);
+	score = 0;
 
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.   
@@ -37,6 +36,7 @@ MyScene::MyScene() : Scene()
 	// add myentity to this Scene as a child.
 	this->addChild(background);
 	this->addChild(myentity);
+	this->addChild(scoretext);
 }
 
 
