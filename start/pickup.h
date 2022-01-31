@@ -30,6 +30,7 @@ public:
 	Type type;
 	Timer t;
 	std::vector<int>chances={0,1,1,1,1,2,3,3,3,3}; //10 chances 10% voor bom / 40% voor banaan / 40 voor niks / 10 % voor kleine banaan
+	int r;
 
 private:
 	/* add your private declarations */

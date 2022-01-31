@@ -13,7 +13,7 @@ Pickup::Pickup() : Entity()
 	t.start();
 
 	int index = rand() % chances.size();
-	int r = chances[index];
+	r = chances[index];
 	if (r == 0) { type = Type::BOMB; this->addSprite("assets/bom.tga"); }
 	if (r == 1) { type = Type::BANANA; this->addSprite("assets/banaan.tga"); }
 	if (r == 2) { type = Type::BANANA2;  this->addSprite("assets/banaan2.tga"); }

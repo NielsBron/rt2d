@@ -43,7 +43,7 @@ private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
 	Background* background;
-	std::vector<Pickup*> pickups;
+	std::vector<Pickup*> pickups; 
 	Pickup* pickup;
 	Bullet* bullet;
 	Text* scoretext;

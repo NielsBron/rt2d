@@ -64,10 +64,12 @@ void MyScene::update(float deltaTime)
 		for (size_t i = 0; i < lanes.size(); i++) {
 			Pickup* pickup = new Pickup();
 			pickup->position = Point2(lanes[i], -200);
-			pickups.push_back(pickup);
-			this->addChild(pickup);
+			if (pickup->r != 3) {
+				pickups.push_back(pickup);
+				this->addChild(pickup);
+			}
+			t.start();
 		}
-		t.start();
 	}
 
 
@@ -115,12 +117,14 @@ void MyScene::update(float deltaTime)
 
 	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
 
-
 	for (size_t i = 0; i < pickups.size(); i++) {
+		std::cout << ": " << i << std::endl;
 		//std::cout << pickups[i]->position.y << " ";
 		Rectangle rect2 = Rectangle(pickups[i]->position.x, pickups[i]->position.y, 150, 150);
 		if (Collider::rectangle2rectangle(rect1, rect2)) {
 			this->removeChild(pickups[i]);
+			delete pickups[i];
+			score++;
 		}
 	}
 
