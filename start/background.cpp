@@ -18,4 +18,5 @@ Background::~Background()
 
 void Background::update(float deltaTime)
 {
+	//this->position.y += 400 * deltaTime;
 }

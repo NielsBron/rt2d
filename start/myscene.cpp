@@ -10,6 +10,10 @@ MyScene::MyScene() : Scene()
 
 	srand(time(nullptr));
 
+	background = new Background();
+	background->position = Point2(640, 360);
+	background->scale = Point2(1.25f, 1.4f);
+
 	controls = new Text();
 	controls->position.x = 870;
 	controls->position.y = 75;
@@ -27,10 +31,6 @@ MyScene::MyScene() : Scene()
 	myentity = new MyEntity();
 	myentity->position = Point2(640, 600);
 
-	background = new Background();
-	background->position = Point2(640, 360);
-	background->scale = Point2(1.25f, 1.4f);
-
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(background);
@@ -43,14 +43,14 @@ MyScene::MyScene() : Scene()
 MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
-	this->removeChild(myentity);
 	this->removeChild(background);
+	this->removeChild(myentity);
 	this->removeChild(scoretext);
 	this->removeChild(controls);
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
-	delete myentity;
 	delete background;
+	delete myentity;
 	delete scoretext;
 	delete controls;
 }
@@ -117,6 +117,12 @@ void MyScene::update(float deltaTime)
 		//	delete poop;
 		//}
 	}
+
+	//for (size_t i = 0; i < background.size(); i++) {
+	//	background[i] = new Background();
+	//	background[i]->position = Point2(640, 360);
+	//	background[i]->scale = Point2(1.25f, 1.4f);
+	//}
 			
 	std::string ct = "Controls: A, S, D, SPACE " ;
 	controls->message(ct);

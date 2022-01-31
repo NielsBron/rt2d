@@ -36,6 +36,7 @@ private:
 	MyEntity* myentity;
 	Poop* poop;
 	Background* background;
+	//std::vector<int> background = {640,360};
 	std::vector<Pickup*> pickups; 
 	Pickup* pickup;
 	Bullet* bullet;
