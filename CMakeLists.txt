@@ -163,8 +163,9 @@ IF(MAKE_START)
 		start/pickup.cpp
 		start/pickup.h
 		start/collider.h
-		start/bullet.h
-		start/bullet.cpp
+		start/poop.cpp
+		start/poop.h
+
 
 
 	)

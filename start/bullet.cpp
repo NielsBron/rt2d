@@ -18,6 +18,5 @@ Bullet::~Bullet()
 
 void Bullet::update(float deltaTime)
 {
-	//position += velocity;
-	this->position.y += 200 * deltaTime;
+	position += velocity;
 }

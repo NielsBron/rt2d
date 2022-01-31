@@ -7,6 +7,7 @@
 #include "pickup.h"
 #include "myscene.h"
 
+
 Pickup::Pickup() : Entity()
 {
 

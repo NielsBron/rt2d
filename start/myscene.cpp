@@ -1,9 +1,3 @@
-/**
- * This class describes MyScene behavior.
- *
- * Copyright 2015 Your Name <you@yourhost.com>
- */
-
 #include <fstream>
 #include <sstream>
 
@@ -30,8 +24,6 @@ MyScene::MyScene() : Scene()
 	background->position = Point2(640, 360);
 	background->scale = Point2(1.25f, 1.4f);
 
-
-
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(background);
@@ -46,11 +38,6 @@ MyScene::~MyScene()
 	this->removeChild(myentity);
 	this->removeChild(background);
 	this->removeChild(scoretext);
-
-	for (size_t i = 0; i < pickups.size(); i++) {
-		this->removeChild(pickups[i]);
-		delete pickups[i];
-	}
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
@@ -72,48 +59,27 @@ void MyScene::update(float deltaTime)
 		}
 	}
 
-
-	// ###############################################################
-	// Escape key stops the Scene
-	// ###############################################################
-	if (input()->getKeyUp(KeyCode::Escape)) {
-		this->stop();
-	}
-
-	// ###############################################################
-	// Spacebar scales myentity
-	// ###############################################################
-	if (input()->getKeyDown(KeyCode::Space)) {
-		myentity->scale = Point(0.8f, 0.8f);
-	}
-	if (input()->getKeyUp(KeyCode::Space)) {
+	if (input()->getKeyUp(KeyCode::Space)) { //plant poop
 		myentity->scale = Point(1.0f, 1.0f);
 	}
 
-	// ###############################################################
-	// Make myentity go to middle lane
-	// ###############################################################
-	if (input()->getKeyDown(KeyCode::S)) {
+	if (input()->getKeyUp(KeyCode::Escape)) { //stop game
+		this->stop();
+	}
+
+
+	if (input()->getKeyDown(KeyCode::S)) { //middle lane
 		myentity->position = Point2(640, 600);
 	}
 
-	// ###############################################################
-	// Make myentity go to left lane
-	// ###############################################################
-	if (input()->getKeyDown(KeyCode::A)) {
+	if (input()->getKeyDown(KeyCode::A)) { //left lane
 		myentity->position = Point2(215, 600);
 	}
 
-	// ###############################################################
-	// Make myentity go to right lane
-	// ###############################################################
-	if (input()->getKeyDown(KeyCode::D)) {
+	if (input()->getKeyDown(KeyCode::D)) { //right lane
 		myentity->position = Point2(1065, 600);
 	}
 
-	// ###############################################################
-	// Collide actions
-	// ###############################################################
 
 	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
 
@@ -124,9 +90,19 @@ void MyScene::update(float deltaTime)
 		if (Collider::rectangle2rectangle(rect1, rect2)) {
 			this->removeChild(pickups[i]);
 			delete pickups[i];
+			pickups.erase(pickups.begin() + i);
 			score++;
 		}
 	}
+	if (input()->getKeyDown(KeyCode::Space)) { //plant poop
+		myentity->scale = Point(0.8f, 0.8f);
+		poop = new Poop();
+		poop->position = myentity->position;
+		this->addChild(poop);
+		if (Collider::rectangle2rectangle(rect1, rect1)) {
+		}
+	}
+	
 
 	std::string st = "Score: ";
 	st += std::to_string(score);
