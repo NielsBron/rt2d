@@ -10,10 +10,17 @@ MyScene::MyScene() : Scene()
 
 	srand(time(nullptr));
 
+	controls = new Text();
+	controls->position.x = 870;
+	controls->position.y = 75;
+	controls->scale = Point2(0.5f, 0.5f);
+
 	scoretext = new Text();
+	scoretext->scale = Point2(0.75f, 0.75f);
 	scoretext->position.x = 50;
 	scoretext->position.y = 75;
 	score = 0;
+
 
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.   
@@ -29,6 +36,7 @@ MyScene::MyScene() : Scene()
 	this->addChild(background);
 	this->addChild(myentity);
 	this->addChild(scoretext);
+	this->addChild(controls);
 }
 
 
@@ -38,11 +46,13 @@ MyScene::~MyScene()
 	this->removeChild(myentity);
 	this->removeChild(background);
 	this->removeChild(scoretext);
+	this->removeChild(controls);
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
 	delete background;
 	delete scoretext;
+	delete controls;
 }
 
 void MyScene::update(float deltaTime)
@@ -82,27 +92,34 @@ void MyScene::update(float deltaTime)
 
 
 	Rectangle rect1 = Rectangle(myentity->position.x, myentity->position.y, 150, 150);
+	//Rectangle rect3 = Rectangle(poop->position.x, poop->position.y, 150, 150);
 
 	for (size_t i = 0; i < pickups.size(); i++) {
 		std::cout << ": " << i << std::endl;
-		//std::cout << pickups[i]->position.y << " ";
 		Rectangle rect2 = Rectangle(pickups[i]->position.x, pickups[i]->position.y, 150, 150);
+		if (input()->getKeyDown(KeyCode::Space)) { //plant poop
+			myentity->scale = Point(0.8f, 0.8f);
+			poop = new Poop();
+			poop->position = myentity->position;
+			this->addChild(poop);
+		}
 		if (Collider::rectangle2rectangle(rect1, rect2)) {
 			this->removeChild(pickups[i]);
 			delete pickups[i];
 			pickups.erase(pickups.begin() + i);
 			score++;
 		}
+		//if (Collider::rectangle2rectangle(rect2, rect3)) {
+		//	this->removeChild(pickups[i]);
+		//	delete pickups[i];
+		//	pickups.erase(pickups.begin() + i);
+		//	this->removeChild(poop);
+		//	delete poop;
+		//}
 	}
-	if (input()->getKeyDown(KeyCode::Space)) { //plant poop
-		myentity->scale = Point(0.8f, 0.8f);
-		poop = new Poop();
-		poop->position = myentity->position;
-		this->addChild(poop);
-		if (Collider::rectangle2rectangle(rect1, rect1)) {
-		}
-	}
-	
+			
+	std::string ct = "Controls: A, S, D, SPACE " ;
+	controls->message(ct);
 
 	std::string st = "Score: ";
 	st += std::to_string(score);

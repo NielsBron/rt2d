@@ -39,6 +39,7 @@ private:
 	std::vector<Pickup*> pickups; 
 	Pickup* pickup;
 	Bullet* bullet;
+	Text* controls;
 	Text* scoretext;
 	int score;
 	Timer t;
